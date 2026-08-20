@@ -36,7 +36,6 @@ public class EMCMEStorage implements StorageCell {
    // Pagination support for large knowledge sets
    private static final Map<String, PaginationState> PAGINATION_STATES = new WeakHashMap<>();
 
-   // ...existing code...
    private final UUID owner;
    private final boolean nbtFilter;
 

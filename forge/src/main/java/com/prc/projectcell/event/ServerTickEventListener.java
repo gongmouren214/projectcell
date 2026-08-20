@@ -38,9 +38,6 @@ public class ServerTickEventListener {
         if (tickCounter % 100 == 0) {  // Every 5 seconds
             // Log if too many queued tasks
             String asyncStats = com.prc.projectcell.ae2.AsyncEMCProcessor.getStats();
-            if (asyncStats.contains("queued tasks: [1-9]")) {
-                // Optional: Log queue buildup
-            }
         }
     }
 }

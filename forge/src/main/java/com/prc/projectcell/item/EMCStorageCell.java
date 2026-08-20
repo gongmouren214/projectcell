@@ -19,7 +19,7 @@ public class EMCStorageCell extends Item {
    }
 
    @NotNull
-   public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+   public InteractionResultHolder<ItemStack> use(Level level, Player player, @NotNull InteractionHand usedHand) {
       ItemStack itemstack = player.getItemInHand(usedHand);
       if (level.isClientSide) {
          return InteractionResultHolder.pass(itemstack);
@@ -37,7 +37,7 @@ public class EMCStorageCell extends Item {
       }
    }
 
-   public void appendHoverText(ItemStack stack, @org.jetbrains.annotations.Nullable Level level, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+   public void appendHoverText(@NotNull ItemStack stack, @org.jetbrains.annotations.Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
       super.appendHoverText(stack, level, tooltipComponents, tooltipFlag);
       boolean nbtFilter = ProjectCell.getNbtFilter(stack);
       tooltipComponents.add(nbtFilter
