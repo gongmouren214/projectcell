@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.prc.projectcell;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -9,7 +9,7 @@ public class Config {
    public static final Client CLIENT = new Client();
 
    public static void register() {
-      ModLoadingContext ctx = ModLoadingContext.get();
+      @SuppressWarnings("removal") ModLoadingContext ctx = ModLoadingContext.get();
       ctx.registerConfig(ModConfig.Type.CLIENT, CLIENT.spec, "projectcell/client.toml");
       ctx.registerConfig(ModConfig.Type.COMMON, SERVER.spec, "projectcell/server.toml");
    }

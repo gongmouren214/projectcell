@@ -1,8 +1,8 @@
-package com.example.examplemod.events;
+package com.prc.projectcell.events;
 
-import com.example.examplemod.Config;
-import com.example.examplemod.ProjectCell;
-import com.example.examplemod.util.ProjectEUtil;
+import com.prc.projectcell.Config;
+import com.prc.projectcell.ProjectCell;
+import com.prc.projectcell.util.ProjectEUtil;
 import moze_intel.projecte.api.ItemInfo;
 import moze_intel.projecte.api.capabilities.IKnowledgeProvider;
 import moze_intel.projecte.api.proxy.IEMCProxy;

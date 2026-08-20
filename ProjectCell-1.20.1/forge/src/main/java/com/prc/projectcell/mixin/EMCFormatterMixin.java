@@ -1,6 +1,6 @@
-package com.example.examplemod.mixin;
+package com.prc.projectcell.mixin;
 
-import com.example.examplemod.util.EMCFormatUtil;
+import com.prc.projectcell.util.EMCFormatUtil;
 import moze_intel.projecte.utils.Constants;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,10 +1,10 @@
-package com.example.examplemod.ae2;
+package com.prc.projectcell.ae2;
 
 import appeng.api.storage.cells.ICellHandler;
 import appeng.api.storage.cells.ISaveProvider;
 import appeng.api.storage.cells.StorageCell;
-import com.example.examplemod.ProjectCell;
-import com.example.examplemod.item.EMCStorageCell;
+import com.prc.projectcell.ProjectCell;
+import com.prc.projectcell.item.EMCStorageCell;
 import java.util.UUID;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;

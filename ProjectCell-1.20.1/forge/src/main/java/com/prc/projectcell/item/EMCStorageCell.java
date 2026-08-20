@@ -1,6 +1,6 @@
-package com.example.examplemod.item;
+package com.prc.projectcell.item;
 
-import com.example.examplemod.ProjectCell;
+import com.prc.projectcell.ProjectCell;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

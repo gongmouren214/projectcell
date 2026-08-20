@@ -99,10 +99,9 @@ dependencies {
 
     forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-
-
-    modImplementation("curse.maven:applied-energistics-2-223794:6091401")
+    modImplementation("curse.maven:applied-energistics-2-223794:7148487")
     modImplementation("curse.maven:projecte-226410:4901949")
+    modImplementation("curse.maven:guideme-1173950:8204776")
 }
 
 sourcesJar {

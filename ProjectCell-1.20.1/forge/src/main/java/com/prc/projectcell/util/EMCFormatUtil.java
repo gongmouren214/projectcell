@@ -1,6 +1,6 @@
-package com.example.examplemod.util;
+package com.prc.projectcell.util;
 
-import com.example.examplemod.Config;
+import com.prc.projectcell.Config;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;

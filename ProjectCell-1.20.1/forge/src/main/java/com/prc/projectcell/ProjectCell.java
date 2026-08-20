@@ -1,17 +1,15 @@
-package com.example.examplemod;
+package com.prc.projectcell;
 
 import appeng.api.storage.StorageCells;
-import com.example.examplemod.ae2.CellHandler;
-import com.example.examplemod.item.EMCStorageCell;
+import com.prc.projectcell.ae2.CellHandler;
+import com.prc.projectcell.item.EMCStorageCell;
 import com.mojang.logging.LogUtils;
 import java.util.UUID;
-import net.minecraft.resources.ResourceLocation;
+
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -32,17 +30,13 @@ public class ProjectCell {
    private static final String TAG_NBT_FILTER = "nbt_filter";
 
    public ProjectCell() {
-      IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+      @SuppressWarnings("removal") IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
       Config.register();
 
       modEventBus.addListener(this::commonSetup);
       modEventBus.addListener(this::addCreative);
       ITEMS.register(modEventBus);
-   }
-
-   public static ResourceLocation rl(String path) {
-      return new ResourceLocation(MODID, path);
    }
 
    public static UUID getOwnerUUID(net.minecraft.world.item.ItemStack stack) {
@@ -58,11 +52,15 @@ public class ProjectCell {
    }
 
    public static boolean hasOwnerUUID(net.minecraft.world.item.ItemStack stack) {
-      return stack.hasTag() && stack.getTag().contains(TAG_OWNER_UUID);
+       if (!stack.hasTag()) return false;
+       assert stack.getTag() != null;
+       return stack.getTag().contains(TAG_OWNER_UUID);
    }
 
    public static boolean getNbtFilter(net.minecraft.world.item.ItemStack stack) {
-      return stack.hasTag() && stack.getTag().getBoolean(TAG_NBT_FILTER);
+       if (!stack.hasTag()) return false;
+       assert stack.getTag() != null;
+       return stack.getTag().getBoolean(TAG_NBT_FILTER);
    }
 
    public static void setNbtFilter(net.minecraft.world.item.ItemStack stack, boolean value) {

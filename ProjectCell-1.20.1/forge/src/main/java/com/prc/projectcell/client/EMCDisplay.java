@@ -1,8 +1,8 @@
-package com.example.examplemod.client;
+package com.prc.projectcell.client;
 
-import com.example.examplemod.Config;
-import com.example.examplemod.ProjectCell;
-import com.example.examplemod.util.EMCFormatUtil;
+import com.prc.projectcell.Config;
+import com.prc.projectcell.ProjectCell;
+import com.prc.projectcell.util.EMCFormatUtil;
 import java.math.BigInteger;
 import javax.annotation.Nullable;
 import moze_intel.projecte.api.capabilities.IKnowledgeProvider;
