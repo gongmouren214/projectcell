@@ -73,7 +73,7 @@ public class EMCMEStorage implements StorageCell {
       return hasBlockedNbt(key.toStack());
    }
 
-     private static AEItemKey createKey(ItemInfo info) {
+      public static AEItemKey createKey(ItemInfo info) {
         // Try to get from cache first
         AEItemKey cached = KEY_CACHE.get(info);
         if (cached != null) {
@@ -241,8 +241,8 @@ public class EMCMEStorage implements StorageCell {
         
         BigInteger playerEmc = provider.getEmc();
         
-        // Optimization: use Math.min with long arithmetic when possible
-        long maxExtractFromValue = playerEmc.divide(BigInteger.valueOf(itemValue)).longValue();
+        // Optimization: use safe long arithmetic instead of BigInteger division
+        long maxExtractFromValue = SafeLongArithmetic.safeDivide(playerEmc, itemValue);
         long extractAmount = Math.min(maxExtractFromValue, amount);
         extractAmount = Math.min(extractAmount, limit());
         
@@ -272,32 +272,36 @@ public class EMCMEStorage implements StorageCell {
               return;
            }
 
-           // Iterate through knowledge and collect available stacks
-           // Use caching for EMC values to reduce expensive getValue() calls
-           for (ItemInfo info : provider.getKnowledge()) {
-              // Fast path: check EMC value first with caching
-              long itemValue = EMCValueCache.getValue(info);
-              if (itemValue <= 0L) {
+           // ONE-PASS OPTIMIZATION: Compute everything once at snapshot creation
+           // Then reuse all values - eliminates duplicate work!
+           KnowledgeSnapshot.CachedSnapshot snapshot =
+              KnowledgeSnapshot.getOrCreateSnapshot(this.owner, provider, this.nbtFilter);
+
+           // Iterate through snapshot (all values pre-computed)
+           for (ItemInfo info : snapshot.itemData.keySet()) {
+              KnowledgeSnapshot.ComputedItemData data = snapshot.itemData.get(info);
+
+              if (data == null || data.emcValue() <= 0L) {
+                 continue;
+              }
+
+              // All these are ALREADY COMPUTED - just retrieve
+              // No duplicate getValue() or createKey() calls!
+              long itemValue = data.emcValue();
+              AEItemKey key = data.key();
+              boolean blocked = data.isBlocked();
+
+              // Skip if blocked
+              if (blocked) {
                  continue;
               }
               
-              // Optimization: use long division for single-item count
-              long maxCount = playerEmc.divide(BigInteger.valueOf(itemValue)).longValue();
+              // Calculate available count using safe arithmetic
+              long maxCount = SafeLongArithmetic.safeDivide(playerEmc, itemValue);
               if (maxCount <= 0L) {
                  continue;
               }
-              
-              // Only create key and check blocked status if item has valid EMC count
-              AEItemKey key = createKey(info);
-              if (key == null) {
-                 continue;
-              }
-              
-              // NBT filter check last (most expensive operation)
-              if (this.nbtFilter && isBlocked(key)) {
-                 continue;
-              }
-              
+
               // Clamp to limit
               long stackCount = Math.min(maxCount, lim);
               out.add(key, stackCount);

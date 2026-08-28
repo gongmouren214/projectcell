@@ -6,7 +6,6 @@
       <module name="com.example.examplemod.projectcell.main" target="17" />
       <module name="com.example.examplemod.projectcell.test" target="17" />
       <module name="com.prc.projectcell.projectcell" target="17" />
-      <module name="com.prc.projectcell.projectcell.common" target="17" />
       <module name="common" target="17" />
     </bytecodeTargetLevel>
   </component>
